@@ -69,10 +69,7 @@
     <ul id="messagesList"></ul>
     <div class="bottom_bar">
       <input id="nicknameInput" placeholder="Nickname" />
-      <input
-        id="messageInput"
-        placeholder="Type a message"
-      />
+      <input id="messageInput" placeholder="Type a message" />
       <button id="sendButton">Send</button>
     </div>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -81,8 +78,8 @@
       const messagesList = document.getElementById("messagesList");
       const messageInput = document.getElementById("messageInput");
       const nicknameInput = document.getElementById("nicknameInput");
-
       const sendButton = document.getElementById("sendButton");
+
       sendButton.addEventListener("click", function () {
         socket.emit(
           "chat message",
@@ -90,6 +87,7 @@
         );
         messageInput.value = "";
       });
+      
       socket.on("chat message", function (msg) {
         messagesList.innerHTML += `<li>${msg}</li>`;
         window.scrollTo(0, document.body.scrollHeight);
