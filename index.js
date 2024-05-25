@@ -1,19 +1,24 @@
-const app = require('express')();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const app = require("express")()
+const http = require("http").createServer(app)
+const path = require("path")
+const io = require("socket.io")(http)
 require("dotenv").config()
-const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res)=>{
-  res.sendFile(__dirname + '/index.html');
-});
+const port = process.env.port || 3001
 
-io.on('connection', (socket)=>{
-  socket.on('chat message', (msg)=>{
-    io.emit('chat message', msg);
-  });
-});
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"))
+})
 
-http.listen(PORT, ()=>{
-  console.log('Server is running on the port ' + PORT);
-});
+
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg)
+  })
+})
+
+
+
+http.listen(port, () => {
+  console.log("server is running at the http://localhost:3000");
+})
